@@ -1,0 +1,146 @@
+.logcontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #121212;
+  position: relative;
+  overflow: hidden;
+}
+
+.triangle {
+  position: absolute;
+  top: 20%;
+  left: 0%;
+  width: 20%;
+  height: auto;
+  z-index: 1;
+}
+
+.circle {
+  position: absolute;
+  top: 20%;
+  right: 0%;
+  width: 10%;
+  height: auto;
+  z-index: 1;
+}
+
+.circle2 {
+  position: absolute;
+  bottom: 0%;
+  right: 30%;
+  width: 20%;
+  height: auto;
+  z-index: 1;
+}
+
+.formContainer {
+  z-index: 2;
+  width: 400px;
+  padding: 20px;
+  border-radius: 8px;
+
+  text-align: center;
+}
+
+.title {
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.input {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #2b2b2b;
+  color: #fff;
+  font-size: 16px;
+}
+
+.primaryButton {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.googleButton {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid #555;
+  border-radius: 10px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.divider {
+  color: #aaa;
+  margin: 20px 0;
+  position: relative;
+  font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: #aaa;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.text {
+  color: #aaa;
+  margin-top: 10px;
+}
+
+.link {
+  color: #4caf50;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.backButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
