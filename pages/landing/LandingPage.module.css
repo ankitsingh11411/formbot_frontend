@@ -1,0 +1,104 @@
+.landing_container {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header_buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.btn_primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.main_content {
+  padding: 40px 20px;
+}
+
+.hero {
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.btn_large {
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+}
+
+.chatbot_preview img {
+  width: 100%;
+  max-width: 800px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 450px;
+}
+
+.footer {
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  position: relative;
+}
+
+.footer_content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  width: 100%;
+}
+
+.logohead h2 {
+  color: #007bff;
+}
+.product h2 {
+  color: #007bff;
+}
+.community h2 {
+  color: #007bff;
+}
+.company h2 {
+  color: #007bff;
+}

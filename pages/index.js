@@ -1,8 +1,7 @@
-import Login from './login';
-import Register from './register';
-import LandingPage from './landing';
-import FormPage from './formpage';
-import Dashboard from './dashboard';
-import Settings from './settings';
-
-export { Login, Register, LandingPage, FormPage, Dashboard, Settings };
+export { default as Login } from './login';
+export { default as Register } from './register';
+export { default as LandingPage } from './landing';
+export { default as FormPage } from './formpage';
+export { default as Dashboard } from './dashboard';
+export { default as Settings } from './settings';
+export { default as NotFound } from './notfound';

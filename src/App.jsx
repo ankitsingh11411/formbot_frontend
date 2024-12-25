@@ -8,12 +8,21 @@ import {
   FormPage,
   Dashboard,
   Settings,
+  NotFound,
 } from '../pages/index.js';
 
 export default function App() {
   return (
-    <div>
-      <h1>FormBot</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/formpage" element={<FormPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
