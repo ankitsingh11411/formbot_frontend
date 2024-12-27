@@ -1,0 +1,154 @@
+:root {
+  --header-bg: #1e1e2f;
+  --header-text: #ffffff;
+  --dropdown-bg: #2e2e3e;
+  --dropdown-text: #ffffff;
+  --option-hover-bg: #444;
+  --switch-bg: #ccc; /* Default switch background */
+  --switch-hover-bg: #bbb; /* Default hover color */
+  --switch-dark-bg: #0066ff; /* Blue switch background in dark mode */
+  --slider-dark: #000000; /* Black slider in dark mode */
+  --slider-light: #ffffff; /* White slider in light mode */
+  --share-bg: #0066ff;
+  --share-hover-bg: #004bbb;
+  --share-text: white;
+}
+
+[data-theme='dark'] {
+  --switch-bg: var(--switch-dark-bg); /* Blue switch background in dark mode */
+}
+
+[data-theme='dark'] .slider {
+  background-color: var(--slider-dark); /* Black slider in dark mode */
+  transform: translateX(26px); /* Slider moves when dark mode is on */
+}
+
+[data-theme='light'] {
+  --switch-bg: #ccc; /* Default switch background */
+}
+
+[data-theme='light'] .slider {
+  background-color: var(--slider-light); /* White slider in light mode */
+  transform: translateX(2px); /* Slider position for light mode */
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  background-color: var(--header-bg);
+  padding: 0 20px;
+  position: relative;
+  font-family: 'poppins', sans-serif;
+}
+
+.workspaceContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.workspaceName {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--header-text);
+}
+
+.arrow {
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 5px); /* Dropdown appears below the header */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--dropdown-bg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 150px;
+  z-index: 10;
+  text-align: left;
+}
+
+.option {
+  padding: 10px;
+  cursor: pointer;
+  color: var(--dropdown-text);
+}
+
+.option.logout {
+  color: red;
+}
+
+.option:hover {
+  background-color: var(--option-hover-bg);
+}
+
+.actions {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 40px; /* Equal space between switch and share button */
+}
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.label {
+  font-size: 14px;
+  color: var(--header-text);
+}
+
+.switch {
+  width: 50px;
+  height: 24px;
+  background-color: var(--switch-bg); /* Default color */
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.switch:hover {
+  background-color: var(--switch-hover-bg); /* Slightly darker hover effect */
+}
+
+.slider {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--slider-light); /* White slider in light mode */
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  transition: all 0.3s;
+}
+
+.shareButton {
+  background-color: var(--share-bg);
+  color: var(--share-text);
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.shareButton:hover {
+  background-color: var(--share-hover-bg);
+}
