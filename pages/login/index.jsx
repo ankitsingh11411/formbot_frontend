@@ -37,24 +37,34 @@ const Login = () => {
       <div className={styles.formContainer}>
         {error && <p className={styles.error}>{error}</p>}
         <form onSubmit={handleSubmit}>
-          Email
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={styles.input}
-            required
-          />
-          Password
-          <input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={styles.input}
-            required
-          />
+          <div className={styles.inputContainer}>
+            <label htmlFor="email" className={styles.label}>
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={styles.input}
+              required
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <label htmlFor="password" className={styles.label}>
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={styles.input}
+              required
+            />
+          </div>
           <button type="submit" className={styles.primaryButton}>
             Log In
           </button>
