@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import styles from './header.module.css';
 
-const Header = ({ username }) => {
+const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [username, setUsername] = useState('');
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
@@ -24,7 +26,7 @@ const Header = ({ username }) => {
   };
 
   const handleLogoutClick = () => {
-    alert('Logged out');
+    localStorage.removeItem('token');
     navigate('/login');
   };
 
@@ -32,11 +34,35 @@ const Header = ({ username }) => {
     document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          navigate('/login');
+          return;
+        }
+
+        const response = await axios.get('http://localhost:5000/api/auth/me', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setUsername(response.data.name);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    };
+
+    fetchUser();
+  }, [navigate]);
+
   return (
     <header className={styles.header}>
       <div className={styles.workspaceContainer}>
         <span className={styles.workspaceName} onClick={toggleDropdown}>
-          {username}'s workspace
+          {username ? `${username}'s workspace` : 'Loading...'}
           <span className={styles.arrow}>{isDropdownOpen ? '▲' : '▼'}</span>
         </span>
         {isDropdownOpen && (

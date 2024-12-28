@@ -5,7 +5,7 @@ import styles from './register.module.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    name: '', // Updated from username to name
     email: '',
     password: '',
     confirmPassword: '',
@@ -20,7 +20,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { username, email, password, confirmPassword } = formData;
+    const { name, email, password, confirmPassword } = formData;
 
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
@@ -29,11 +29,12 @@ const Register = () => {
 
     try {
       await axios.post('http://localhost:5000/api/auth/register', {
-        username,
+        name,
         email,
         password,
+        confirmPassword,
       });
-      navigate('/login');
+      navigate('/dashboard');
     } catch (err) {
       setError(
         err.response?.data?.message || 'Registration failed. Try again.'
@@ -53,13 +54,13 @@ const Register = () => {
         {error && <p className={styles.error}>{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className={styles.field}>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="name">Username</label>
             <input
               type="text"
-              id="username"
-              name="username"
-              placeholder="Enter a username"
-              value={formData.username}
+              id="name"
+              name="name"
+              placeholder="Enter your name"
+              value={formData.name}
               onChange={handleChange}
               className={styles.input}
               required
