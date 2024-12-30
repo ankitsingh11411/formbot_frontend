@@ -52,6 +52,7 @@ const Header = () => {
         setUsername(response.data.name);
       } catch (error) {
         console.error('Error fetching user info:', error);
+        setUsername('');
       }
     };
 
