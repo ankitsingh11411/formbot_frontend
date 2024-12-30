@@ -9,21 +9,24 @@ const Header = () => {
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prev) => !prev);
-  };
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setIsDarkMode(savedTheme === 'dark');
+    document.body.setAttribute('data-theme', savedTheme);
+  }, []);
+
+  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
   const toggleTheme = () => {
     setIsDarkMode((prev) => {
       const newMode = !prev;
+      localStorage.setItem('theme', newMode ? 'dark' : 'light');
       document.body.setAttribute('data-theme', newMode ? 'dark' : 'light');
       return newMode;
     });
   };
 
-  const handleSettingsClick = () => {
-    navigate('/settings');
-  };
+  const handleSettingsClick = () => navigate('/settings');
 
   const handleLogoutClick = () => {
     localStorage.removeItem('token');
@@ -31,8 +34,14 @@ const Header = () => {
   };
 
   useEffect(() => {
-    document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
+    const handleOutsideClick = (event) => {
+      if (!event.target.closest(`.${styles.workspaceContainer}`)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, []);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -42,38 +51,44 @@ const Header = () => {
           navigate('/login');
           return;
         }
-
         const response = await axios.get('http://localhost:5000/api/auth/me', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-
-        setUsername(response.data.name);
+        setUsername(response.data.name || 'Guest');
       } catch (error) {
         console.error('Error fetching user info:', error);
-        setUsername('');
+        setUsername('Guest');
       }
     };
-
     fetchUser();
   }, [navigate]);
 
   return (
     <header className={styles.header}>
       <div className={styles.workspaceContainer}>
-        <span className={styles.workspaceName} onClick={toggleDropdown}>
+        <span
+          className={styles.workspaceName}
+          onClick={toggleDropdown}
+          aria-label="Workspace Options"
+        >
           {username ? `${username}'s workspace` : 'Loading...'}
           <span className={styles.arrow}>{isDropdownOpen ? '▲' : '▼'}</span>
         </span>
         {isDropdownOpen && (
           <div className={styles.dropdown}>
-            <div className={styles.option} onClick={handleSettingsClick}>
+            <div
+              className={styles.option}
+              onClick={handleSettingsClick}
+              role="button"
+            >
               Settings
             </div>
             <div
               className={`${styles.option} ${styles.logout}`}
               onClick={handleLogoutClick}
+              role="button"
             >
               Log Out
             </div>
