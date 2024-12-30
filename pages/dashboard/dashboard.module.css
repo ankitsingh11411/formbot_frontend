@@ -1,34 +1,25 @@
-.container {
-  background-color: var(--background-color);
-}
+/* General Layout */
 .dashboard {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: flex-start;
   padding: 20px;
+  height: 100vh;
+}
+
+/* Sections */
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .folderSection,
 .formSection {
-  flex: 1;
-  margin: 0 20px;
-}
-
-.createFolderButton,
-.createFormButton {
-  background: var(--primary-color);
-  color: var(--text-color);
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-bottom: 20px;
-  transition: background 0.3s ease;
-}
-
-.createFolderButton:hover,
-.createFormButton:hover {
-  background: var(--primary-hover-color);
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
 }
 
 .folders,
@@ -38,21 +29,50 @@
   gap: 15px;
 }
 
-/* Light and Dark Mode Variables */
-:root {
-  --background-color: #ffffff;
-  --text-color: #000000;
-  --primary-color: #007bff;
-  --primary-hover-color: #0056b3;
-  --card-background: #f9f9f9;
-  --card-border: #ddd;
+/* Buttons */
+.createFolderButton {
+  background: var(--button-background);
+  color: var(--button-color);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 200px;
+  margin-bottom: 15px;
 }
 
+.createFormButton {
+  background: var(--accent-color);
+  color: var(--button-color);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 200px;
+  height: 250px;
+  text-align: center;
+}
+
+/* Light Mode */
+[data-theme='light'] {
+  --background-color: #f5f5f5;
+  --text-color: #000000;
+  --button-background: #ffffff;
+  --button-color: #000000;
+  --accent-color: #0057a8;
+}
+
+/* Dark Mode */
 [data-theme='dark'] {
-  --background-color: #181818;
+  --background-color: #202020;
   --text-color: #ffffff;
-  --primary-color: #1e90ff;
-  --primary-hover-color: #1c6dbe;
-  --card-background: #242424;
-  --card-border: #444;
+  --button-background: #525252;
+  --button-color: #ffffff;
+  --accent-color: #0077ff;
+}
+
+/* Root Theme Application */
+.dashboard {
+  background-color: var(--background-color);
+  color: var(--text-color);
 }

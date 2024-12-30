@@ -1,35 +1,40 @@
 .formCard {
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  background: rgb(82, 82, 82);
+  border-radius: 5px;
   padding: 10px;
-  margin: 10px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  cursor: pointer;
+  transition: background 0.3s ease, border 0.3s ease;
+}
+
+.formCard:hover {
+  background: rgb(65, 64, 64);
 }
 
 .formName {
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 10px;
+  color: var(--text-color);
 }
 
-.actions {
-  display: flex;
-  gap: 10px;
+.topRight {
+  position: absolute;
+  right: 5px;
 }
 
-.editButton,
 .deleteButton {
-  background: #007bff;
-  color: white;
+  background: transparent;
   border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
+  color: red;
+  font-size: 16px;
   cursor: pointer;
 }
 
-.deleteButton {
-  background: #ff4d4d;
+.deleteButton:hover {
+  color: #ff4d4d;
 }

@@ -1,50 +1,40 @@
 .folderCard {
-  background: var(--card-background);
-  border: 1px solid var(--card-border);
-  border-radius: 8px;
-  padding: 15px;
-  margin: 10px;
+  background: rgb(82, 82, 82);
+  border-radius: 5px;
+  padding: 10px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 200px;
+  height: 30px;
+  cursor: pointer;
   transition: background 0.3s ease, border 0.3s ease;
 }
 
+.folderCard:hover {
+  background: rgb(65, 64, 64);
+}
+
 .folderName {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
-  margin-bottom: 10px;
   color: var(--text-color);
 }
 
-.actions {
-  display: flex;
-  gap: 10px;
-}
-
-.renameButton,
-.deleteButton,
-.saveButton,
-.cancelButton {
-  background: var(--primary-color);
-  color: var(--text-color);
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
+.topRight {
+  position: absolute;
+  right: 5px;
 }
 
 .deleteButton {
-  background: #ff4d4d;
+  background: transparent;
+  border: none;
+  color: red;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.renameInput {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid var(--card-border);
-  border-radius: 4px;
-  margin-bottom: 10px;
-  background: var(--card-background);
-  color: var(--text-color);
+.deleteButton:hover {
+  color: #ff4d4d;
 }

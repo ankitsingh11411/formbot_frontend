@@ -1,23 +1,20 @@
-import React from 'react';
 import styles from './formCard.module.css';
 
-const FormCard = ({ form, onEdit, onDelete }) => {
+export default function FormCard({ form, onClick, onDelete }) {
   return (
-    <div className={styles.formCard}>
-      <h3 className={styles.formName}>{form.name}</h3>
-      <div className={styles.actions}>
-        <button onClick={() => onEdit(form)} className={styles.editButton}>
-          Edit
-        </button>
+    <div className={styles.formCard} onClick={() => onClick(form._id)}>
+      <div className={styles.topRight}>
         <button
-          onClick={() => onDelete(form._id)}
           className={styles.deleteButton}
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete(form._id);
+          }}
         >
-          Delete
+          🗑️
         </button>
       </div>
+      <span className={styles.formName}>{form.name}</span>
     </div>
   );
-};
-
-export default FormCard;
+}
