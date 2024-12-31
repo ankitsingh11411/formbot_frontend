@@ -18,7 +18,7 @@ const FolderModal = ({ isOpen, onClose, onSave }) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
-        <h2>Create Folder</h2>
+        <h2>Create New Folder</h2>
         <input
           type="text"
           placeholder="Enter folder name"
@@ -27,11 +27,11 @@ const FolderModal = ({ isOpen, onClose, onSave }) => {
           className={styles.input}
         />
         <div className={styles.modalActions}>
+          <button onClick={handleSave} className={styles.saveButton}>
+            Done
+          </button>
           <button onClick={onClose} className={styles.cancelButton}>
             Cancel
-          </button>
-          <button onClick={handleSave} className={styles.saveButton}>
-            Save
           </button>
         </div>
       </div>

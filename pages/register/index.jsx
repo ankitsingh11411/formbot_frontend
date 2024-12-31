@@ -5,7 +5,7 @@ import styles from './register.module.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: '', // Updated from username to name
+    name: '',
     email: '',
     password: '',
     confirmPassword: '',

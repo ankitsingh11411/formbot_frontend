@@ -14,7 +14,7 @@ export default function FormCard({ form, onClick, onDelete }) {
           🗑️
         </button>
       </div>
-      <span className={styles.formName}>{form.name}</span>
+      <span className={styles.formName}>{form.title}</span>
     </div>
   );
 }

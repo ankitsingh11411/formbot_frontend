@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './folderCard.module.css';
 
 export default function FolderCard({ folder, onClick, onDelete }) {
@@ -7,7 +8,7 @@ export default function FolderCard({ folder, onClick, onDelete }) {
         <button
           className={styles.deleteButton}
           onClick={(e) => {
-            e.stopPropagation(); // Prevents triggering the folder click
+            e.stopPropagation();
             onDelete(folder._id);
           }}
         >

@@ -10,6 +10,7 @@
   height: 30px;
   cursor: pointer;
   transition: background 0.3s ease, border 0.3s ease;
+  font-family: 'poppins', sans-serif;
 }
 
 .folderCard:hover {

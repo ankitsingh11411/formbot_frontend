@@ -5,16 +5,21 @@ import FolderCard from '../../components/folderCard';
 import FormCard from '../../components/formCard';
 import FolderModal from '../../components/folderModal';
 import FormModal from '../../components/formModal';
+import DeleteFormModal from '../../components/deleteFormModal';
+import DeleteFolderModal from '../../components/deleteFolderModal';
 import styles from './dashboard.module.css';
 
 export default function Dashboard() {
   const [folders, setFolders] = useState([]);
   const [forms, setForms] = useState([]);
-  const [selectedFolderId, setSelectedFolderId] = useState(null);
+  const [selectedFolderId, setSelectedFolderId] = useState(null); // Null means dashboard view
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
+  const [isDeleteFolderModalOpen, setIsDeleteFolderModalOpen] = useState(false);
+  const [isDeleteFormModalOpen, setIsDeleteFormModalOpen] = useState(false);
+  const [folderToDelete, setFolderToDelete] = useState(null);
+  const [formToDelete, setFormToDelete] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [editingForm, setEditingForm] = useState(null);
 
   useEffect(() => {
     const fetchFolders = async () => {
@@ -27,53 +32,68 @@ export default function Dashboard() {
         setFolders(data);
       } catch (error) {
         console.error('Error fetching folders:', error);
+        alert('Failed to fetch folders. Please refresh the page.');
       }
     };
 
     const fetchForms = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/forms', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
+        const { data } = await axios.get(
+          `http://localhost:5000/api/forms/${selectedFolderId || 'null'}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          }
+        );
         setForms(data);
       } catch (error) {
         console.error('Error fetching forms:', error);
+        alert('Failed to fetch forms. Please refresh the page.');
       }
     };
 
     fetchFolders();
     fetchForms();
-  }, []);
+  }, [selectedFolderId]);
 
   const toggleDarkMode = () => setIsDarkMode((prev) => !prev);
 
-  const handleDeleteFolder = async (folderId) => {
+  const handleDeleteFolder = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/folders/${folderId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-      setFolders((prevFolders) =>
-        prevFolders.filter((folder) => folder._id !== folderId)
+      await axios.delete(
+        `http://localhost:5000/api/folders/${folderToDelete}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
       );
+      setFolders((prevFolders) =>
+        prevFolders.filter((folder) => folder._id !== folderToDelete)
+      );
+      setSelectedFolderId(null);
+      setIsDeleteFolderModalOpen(false);
     } catch (error) {
       console.error('Error deleting folder:', error);
+      alert('Failed to delete folder. Please try again.');
     }
   };
 
-  const handleDeleteForm = async (formId) => {
+  const handleDeleteForm = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/forms/${formId}`, {
+      await axios.delete(`http://localhost:5000/api/forms/${formToDelete}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
-      setForms((prevForms) => prevForms.filter((form) => form._id !== formId));
+      setForms((prevForms) =>
+        prevForms.filter((form) => form._id !== formToDelete)
+      );
+      setIsDeleteFormModalOpen(false);
     } catch (error) {
       console.error('Error deleting form:', error);
+      alert('Failed to delete form. Please try again.');
     }
   };
 
@@ -92,6 +112,7 @@ export default function Dashboard() {
       setIsFolderModalOpen(false);
     } catch (error) {
       console.error('Error creating folder:', error);
+      alert('Failed to create folder. Please try again.');
     }
   };
 
@@ -99,7 +120,7 @@ export default function Dashboard() {
     try {
       const { data } = await axios.post(
         'http://localhost:5000/api/forms',
-        { name: formName, folderId: selectedFolderId },
+        { title: formName, folderId: selectedFolderId },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -110,46 +131,21 @@ export default function Dashboard() {
       setIsFormModalOpen(false);
     } catch (error) {
       console.error('Error creating form:', error);
-    }
-  };
-
-  const handleEditForm = (form) => {
-    setEditingForm(form);
-    setIsFormModalOpen(true);
-  };
-
-  const handleSaveForm = async (formName) => {
-    try {
-      const { data } = await axios.put(
-        `http://localhost:5000/api/forms/${editingForm._id}`,
-        { name: formName },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        }
-      );
-      setForms((prevForms) =>
-        prevForms.map((form) =>
-          form._id === editingForm._id ? { ...form, name: data.name } : form
-        )
-      );
-      setIsFormModalOpen(false);
-    } catch (error) {
-      console.error('Error saving form:', error);
+      alert('Failed to create form. Please try again.');
     }
   };
 
   return (
-    <div className={isDarkMode ? styles.darkMode : styles.lightMode}>
-      <Header />
-      <div className={styles.dashboard}>
+    <div className={`${styles.dashboard} ${isDarkMode ? styles.darkMode : ''}`}>
+      <Header toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
+      <div className={styles.content}>
         <div className={styles.folderSection}>
           <button
             className={styles.createFolderButton}
             onClick={() => setIsFolderModalOpen(true)}
           >
-            Create a Folder
+            <span className={styles.iconadd}></span>
+            Create Folder
           </button>
           <div className={styles.folders}>
             {folders.map((folder) => (
@@ -157,9 +153,16 @@ export default function Dashboard() {
                 key={folder._id}
                 folder={folder}
                 onClick={() => setSelectedFolderId(folder._id)}
-                onDelete={handleDeleteFolder}
+                onDelete={(folderId) => {
+                  setFolderToDelete(folderId);
+                  setIsDeleteFolderModalOpen(true);
+                }}
               />
             ))}
+            <FolderCard
+              folder={{ name: 'Dashboard', _id: null }}
+              onClick={() => setSelectedFolderId(null)}
+            />
           </div>
         </div>
 
@@ -168,24 +171,20 @@ export default function Dashboard() {
             className={styles.createFormButton}
             onClick={() => setIsFormModalOpen(true)}
           >
-            +
-            <br />
-            Create a Typebot
+            +<br />
+            Create Form
           </button>
           <div className={styles.forms}>
-            {forms
-              .filter(
-                (form) =>
-                  !selectedFolderId || form.folderId === selectedFolderId
-              )
-              .map((form) => (
-                <FormCard
-                  key={form._id}
-                  form={form}
-                  onEdit={handleEditForm}
-                  onDelete={handleDeleteForm}
-                />
-              ))}
+            {forms.map((form) => (
+              <FormCard
+                key={form._id}
+                form={form}
+                onDelete={(formId) => {
+                  setFormToDelete(formId);
+                  setIsDeleteFormModalOpen(true);
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -202,8 +201,23 @@ export default function Dashboard() {
         <FormModal
           isOpen={isFormModalOpen}
           onClose={() => setIsFormModalOpen(false)}
-          onSave={handleSaveForm}
-          initialFormName={editingForm?.name || ''}
+          onSave={handleCreateForm}
+        />
+      )}
+
+      {isDeleteFolderModalOpen && (
+        <DeleteFolderModal
+          isOpen={isDeleteFolderModalOpen}
+          onClose={() => setIsDeleteFolderModalOpen(false)}
+          onConfirm={handleDeleteFolder}
+        />
+      )}
+
+      {isDeleteFormModalOpen && (
+        <DeleteFormModal
+          isOpen={isDeleteFormModalOpen}
+          onClose={() => setIsDeleteFormModalOpen(false)}
+          onConfirm={handleDeleteForm}
         />
       )}
     </div>

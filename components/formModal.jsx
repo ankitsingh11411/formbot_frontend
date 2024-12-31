@@ -1,44 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import styles from './formModal.module.css';
+import React, { useState } from 'react';
+import styles from './folderModal.module.css';
 
-const FormModal = ({ isOpen, onClose, onSave, initialFormName }) => {
-  const [formName, setFormName] = useState(initialFormName);
+const FolderModal = ({ isOpen, onClose, onSave }) => {
+  const [folderName, setFolderName] = useState('');
 
-  useEffect(() => {
-    if (isOpen) {
-      setFormName(initialFormName);
+  const handleSave = () => {
+    if (!folderName.trim()) {
+      alert('Folder name cannot be empty');
+      return;
     }
-  }, [isOpen, initialFormName]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave(formName);
+    onSave(folderName);
+    setFolderName('');
   };
 
-  if (!isOpen) {
-    console.log('Modal is closed');
-    return null;
-  }
+  if (!isOpen) return null;
 
   return (
-    <div className={styles.modal}>
+    <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
-        <h2>Edit Form</h2>
-        <form onSubmit={handleSubmit}>
-          <label>Form Name</label>
-          <input
-            type="text"
-            value={formName}
-            onChange={(e) => setFormName(e.target.value)}
-          />
-          <button type="submit">Save</button>
-          <button type="button" onClick={onClose}>
+        <h2>Create New Typebot</h2>
+        <input
+          type="text"
+          placeholder="Enter form name"
+          value={folderName}
+          onChange={(e) => setFolderName(e.target.value)}
+          className={styles.input}
+        />
+        <div className={styles.modalActions}>
+          <button onClick={handleSave} className={styles.saveButton}>
+            Done
+          </button>
+          <div className={styles.divider}></div>
+          <button onClick={onClose} className={styles.cancelButton}>
             Cancel
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );
 };
 
-export default FormModal;
+export default FolderModal;
