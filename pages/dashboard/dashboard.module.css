@@ -1,25 +1,22 @@
-/* General Layout */
 .dashboard {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 20px;
-  height: 100vh;
-}
-
-/* Sections */
-.headerSection {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 .folderSection,
 .formSection {
   display: flex;
-  flex-direction: column;
-  margin: 20px 0;
+  flex-direction: row;
+  margin: 20px 100px;
+  gap: 20px;
 }
 
 .folders,
@@ -29,21 +26,42 @@
   gap: 15px;
 }
 
-/* Buttons */
 .createFolderButton {
-  background: var(--button-background);
-  color: var(--button-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--dropdown-bg);
+  color: var(--dropdown-text);
   border: none;
-  padding: 10px 15px;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   width: 200px;
-  margin-bottom: 15px;
+  height: 60px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.createFolderButton:hover {
+  background-color: var(--option-hover-bg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.createFolderButton .iconadd {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: url(/Margin.png) no-repeat center center;
+  background-size: contain;
 }
 
 .createFormButton {
-  background: var(--accent-color);
-  color: var(--button-color);
+  background: var(--share-bg); /* Match share button background */
+  color: var(--share-text); /* Match share button text color */
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
@@ -51,28 +69,9 @@
   width: 200px;
   height: 250px;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Light Mode */
-[data-theme='light'] {
-  --background-color: #f5f5f5;
-  --text-color: #000000;
-  --button-background: #ffffff;
-  --button-color: #000000;
-  --accent-color: #0057a8;
-}
-
-/* Dark Mode */
-[data-theme='dark'] {
-  --background-color: #202020;
-  --text-color: #ffffff;
-  --button-background: #525252;
-  --button-color: #ffffff;
-  --accent-color: #0077ff;
-}
-
-/* Root Theme Application */
-.dashboard {
-  background-color: var(--background-color);
-  color: var(--text-color);
+.createFormButton:hover {
+  background-color: var(--share-hover-bg);
 }
