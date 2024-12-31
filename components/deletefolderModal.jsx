@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './deletefolderModal.module.css';
 
-const DeleteFolderModal = ({ isOpen, onClose, onDelete }) => {
+const DeleteFolderModal = ({ isOpen, onClose, onConfirm }) => {
   if (!isOpen) return null;
 
   return (
@@ -13,11 +13,17 @@ const DeleteFolderModal = ({ isOpen, onClose, onDelete }) => {
           undone.
         </p>
         <div className={styles.modalActions}>
-          <button onClick={onDelete} className={styles.saveButton}>
+          <button
+            onClick={onConfirm} // Call the onConfirm function when Confirm is clicked
+            className={styles.saveButton}
+          >
             Confirm
           </button>
           <div className={styles.divider}></div>
-          <button onClick={onClose} className={styles.cancelButton}>
+          <button
+            onClick={onClose} // Close the modal without deleting
+            className={styles.cancelButton}
+          >
             Cancel
           </button>
         </div>

@@ -4,32 +4,32 @@
   --dropdown-bg: #2e2e3e;
   --dropdown-text: #ffffff;
   --option-hover-bg: #444;
-  --switch-bg: #ccc; /* Default switch background */
-  --switch-hover-bg: #bbb; /* Default hover color */
-  --switch-dark-bg: #0066ff; /* Blue switch background in dark mode */
-  --slider-dark: #000000; /* Black slider in dark mode */
-  --slider-light: #ffffff; /* White slider in light mode */
+  --switch-bg: #ccc;
+  --switch-hover-bg: #bbb;
+  --switch-dark-bg: #0066ff;
+  --slider-dark: #000000;
+  --slider-light: #ffffff;
   --share-bg: #0066ff;
   --share-hover-bg: #004bbb;
   --share-text: white;
 }
 
 [data-theme='dark'] {
-  --switch-bg: var(--switch-dark-bg); /* Blue switch background in dark mode */
+  --switch-bg: var(--switch-dark-bg);
 }
 
 [data-theme='dark'] .slider {
-  background-color: var(--slider-dark); /* Black slider in dark mode */
-  transform: translateX(26px); /* Slider moves when dark mode is on */
+  background-color: var(--slider-dark);
+  transform: translateX(26px);
 }
 
 [data-theme='light'] {
-  --switch-bg: #ccc; /* Default switch background */
+  --switch-bg: #ccc;
 }
 
 [data-theme='light'] .slider {
-  background-color: var(--slider-light); /* White slider in light mode */
-  transform: translateX(2px); /* Slider position for light mode */
+  background-color: var(--slider-light);
+  transform: translateX(2px);
 }
 
 .header {
@@ -42,6 +42,7 @@
   position: relative;
   font-family: 'poppins', sans-serif;
   border-bottom: 1px solid white;
+  z-index: 100;
 }
 
 .workspaceContainer {
@@ -50,6 +51,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  border: 1px solid var(--header-text);
+  border-radius: 8px;
+  padding: 15px;
 }
 
 .workspaceName {
@@ -68,14 +72,14 @@
 
 .dropdown {
   position: absolute;
-  top: calc(100% + 5px); /* Dropdown appears below the header */
+  top: calc(100% + 5px);
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--dropdown-bg);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   width: 150px;
-  z-index: 10;
+  z-index: 10000;
   text-align: left;
 }
 
@@ -100,7 +104,7 @@
   transform: translateY(-50%);
   display: flex;
   align-items: center;
-  gap: 40px; /* Equal space between switch and share button */
+  gap: 40px;
 }
 
 .themeToggle {
@@ -117,7 +121,7 @@
 .switch {
   width: 50px;
   height: 24px;
-  background-color: var(--switch-bg); /* Default color */
+  background-color: var(--switch-bg);
   border-radius: 12px;
   position: relative;
   cursor: pointer;
@@ -125,14 +129,14 @@
 }
 
 .switch:hover {
-  background-color: var(--switch-hover-bg); /* Slightly darker hover effect */
+  background-color: var(--switch-hover-bg);
 }
 
 .slider {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background-color: var(--slider-light); /* White slider in light mode */
+  background-color: var(--slider-light);
   position: absolute;
   top: 1px;
   left: 2px;

@@ -12,7 +12,7 @@ export default function FolderCard({ folder, onClick, onDelete }) {
             onDelete(folder._id);
           }}
         >
-          🗑️
+          <span className={styles.deleteIcon}></span>
         </button>
       </div>
       <span className={styles.folderName}>{folder.name}</span>
