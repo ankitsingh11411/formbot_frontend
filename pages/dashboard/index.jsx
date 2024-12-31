@@ -209,7 +209,7 @@ export default function Dashboard() {
         <DeleteFolderModal
           isOpen={isDeleteFolderModalOpen}
           onClose={() => setIsDeleteFolderModalOpen(false)}
-          onConfirm={handleDeleteFolder}
+          onConfirm={handleDeleteFolder} // Updated to use onConfirm instead of onDelete
         />
       )}
 
