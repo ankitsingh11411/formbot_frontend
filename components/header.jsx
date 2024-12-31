@@ -30,7 +30,7 @@ const Header = () => {
 
   const handleLogoutClick = () => {
     localStorage.removeItem('token');
-    navigate('/login');
+    navigate('/');
   };
 
   useEffect(() => {
