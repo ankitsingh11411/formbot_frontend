@@ -5,8 +5,8 @@ import FolderCard from '../../components/folderCard';
 import FormCard from '../../components/formCard';
 import FolderModal from '../../components/folderModal';
 import FormModal from '../../components/formModal';
-import DeleteFormModal from '../../components/deleteFormModal';
-import DeleteFolderModal from '../../components/deleteFolderModal';
+import DeleteFormModal from '../../components/deleteformModal';
+import DeleteFolderModal from '../../components/deletefolderModal';
 import styles from './dashboard.module.css';
 
 export default function Dashboard() {
